@@ -8,8 +8,8 @@
  * Controller of the fbookmarkApp
  */
 angular.module('bookmarkApp')
-  .controller('MainCtrl', ['$scope','$http', '$routeParams', 'settings', 'Search', 'iconMapping', 
-  function ($scope, $http, $routeParams, settings, Search, iconMapping) {
+  .controller('MainCtrl', ['$scope','$http', '$routeParams', '$location', 'settings', 'Search', 'iconMapping', 
+  function ($scope, $http, $routeParams, $location, settings, Search, iconMapping) {
     $scope.links = [];
     $scope.search_results = [];
     $scope.error = NaN;
@@ -26,7 +26,9 @@ angular.module('bookmarkApp')
     $scope.$watch('query', function(query) {
       if(!query || query.length===0) {
         Search.clearSearch();
+        $location.search('search', null);
       } else {
+        $location.search('search', query);
         $scope.error = NaN;
         Search.search(query)
         .then(function(data) {
@@ -47,10 +49,10 @@ angular.module('bookmarkApp')
         res.data.forEach(function(item) {
           item.icon = iconMapping(item.domain);      
         });
-        $scope.links = res.data;
+        $location.search('search', null);
+        $scope.links = $scope.links.concat(res.data);
         $scope.has_more = res.more;
         $scope.next_page = res.next;
-        
       })
       .error(function(res, status) {
         $scope.error = "Oops, something went wrong. ";
