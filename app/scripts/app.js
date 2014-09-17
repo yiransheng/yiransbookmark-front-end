@@ -32,7 +32,7 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        reloadOnSearch : false,
+        reloadOnSearch : true
       })
       .otherwise({
         redirectTo: '/'
@@ -46,5 +46,33 @@ angular
 	    DONE : 2,
 	    ERROR : 3
 		}
-	});
+	})
+  .run(['$rootScope', '$http', '$location', 'settings', 'iconMapping', 
+  function ($rootScope, $http, $location, settings, iconMapping) {
+    $rootScope.links = [];
+    $rootScope.has_more= true;
+    $rootScope.next_page = null;
+    $rootScope.error = null;
+    $rootScope.load_next_page = function(replace) {
+      if(!$rootScope.has_more) return;
+      $http({
+        method : 'GET', 
+        url : settings.api + 'link',
+        params : { next: $rootScope.next_page }
+      })
+      .success(function(res) {
+        res.data.forEach(function(item) {
+          item.icon = iconMapping(item.domain);      
+        });
+        $location.search('search', null);
+        $rootScope.links = replace ? (res.data || []) : $rootScope.links.concat(res.data);
+        $rootScope.has_more = res.more;
+        $rootScope.next_page = res.next;
+      })
+      .error(function(res, status) {
+        $rootScope.error = "Oops, something went wrong. ";
+      });
+    }
+    $rootScope.load_next_page();
+  }]);
 

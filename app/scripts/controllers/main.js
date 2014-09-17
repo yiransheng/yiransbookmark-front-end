@@ -8,55 +8,36 @@
  * Controller of the fbookmarkApp
  */
 angular.module('bookmarkApp')
-  .controller('MainCtrl', ['$scope','$http', '$routeParams', '$location', 'settings', 'Search', 'iconMapping', 
-  function ($scope, $http, $routeParams, $location, settings, Search, iconMapping) {
-    $scope.links = [];
+  .controller('MainCtrl', ['$scope','$rootScope', '$http', '$routeParams', '$location', 'settings', 'Search', 'iconMapping', 
+  function ($scope, $rootScope, $http, $routeParams, $location, settings, Search, iconMapping) {
     $scope.search_results = [];
-    $scope.error = NaN;
     $scope.Search = Search;
     $scope.query = $routeParams.search || '';
-    $scope.has_more=true;
-    $scope.next_page = $routeParams.page || null;
     $scope.showAll = function() {
-      return !$scope.error && Search.status === settings.SEARCH_STATUS.IDLE;
+      return !$rootScope.error && Search.status === settings.SEARCH_STATUS.IDLE;
     }
     $scope.showSearch = function() {
-      return !$scope.error && Search.status === settings.SEARCH_STATUS.DONE;
+      return !$rootScope.error && Search.status === settings.SEARCH_STATUS.DONE;
     }
     $scope.$watch('query', function(query) {
       if(!query || query.length===0) {
-        Search.clearSearch();
         $location.search('search', null);
       } else {
-        $location.search('search', query);
-        $scope.error = NaN;
-        Search.search(query)
-        .then(function(data) {
-          $scope.search_results = data;  
-        }, function() {
-          $scope.error = "Error Searching: \"" + query + '"';   
-        });
+        $location.search('search', query.toLowerCase() );
       }
     });
-    $scope.load_next_page = function() {
-      if(!$scope.has_more) return;
-      $http({
-        method : 'GET', 
-        url : settings.api + 'link',
-        params : { next: $scope.next_page }
-      })
-      .success(function(res) {
-        res.data.forEach(function(item) {
-          item.icon = iconMapping(item.domain);      
-        });
-        $location.search('search', null);
-        $scope.links = $scope.links.concat(res.data);
-        $scope.has_more = res.more;
-        $scope.next_page = res.next;
-      })
-      .error(function(res, status) {
-        $scope.error = "Oops, something went wrong. ";
+    if($routeParams.next && !$scope.query) {
+      $rootScope.next_page = $routeParams.next;
+      $rootScope.load_next_page(true);
+    } else if ($scope.query) {
+      $rootScope.error = NaN;
+      Search.search($scope.query)
+      .then(function(data) {
+        $scope.search_results = data;  
+      }, function() {
+        $rootScope.error = "Error Searching: \"" + query + '"';   
       });
+    } else {
+      Search.clearSearch();
     }
-    $scope.load_next_page();
   }]);
