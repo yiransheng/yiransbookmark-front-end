@@ -71,47 +71,52 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.icon-search:before {
+  content: "\f002";
+}
 .icon-facebook-square:before {
-	content: "\f082";
+  content: "\f082";
 }
 .icon-camera-retro:before {
-	content: "\f083";
+  content: "\f083";
 }
 .icon-twitter:before {
-	content: "\f099";
+  content: "\f099";
 }
 .icon-chain:before {
-	content: "\f0c1";
+  content: "\f0c1";
 }
 .icon-pinterest-square:before {
-	content: "\f0d3";
+  content: "\f0d3";
 }
 .icon-google-plus-square:before {
-	content: "\f0d4";
+  content: "\f0d4";
 }
 .icon-linkedin:before {
-	content: "\f0e1";
+  content: "\f0e1";
 }
 .icon-github-alt:before {
-	content: "\f113";
+  content: "\f113";
+}
+.icon-unlink:before {
+  content: "\f127";
 }
 .icon-youtube:before {
-	content: "\f167";
+  content: "\f167";
 }
 .icon-dropbox:before {
-	content: "\f16b";
+  content: "\f16b";
 }
 .icon-stack-overflow:before {
-	content: "\f16c";
+  content: "\f16c";
 }
 .icon-wordpress:before {
-	content: "\f19a";
+  content: "\f19a";
 }
 .icon-reddit:before {
-	content: "\f1a1";
+  content: "\f1a1";
 }
 .icon-hacker-news:before {
-	content: "\f1d4";
+  content: "\f1d4";
 }
-
 

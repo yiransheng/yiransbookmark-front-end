@@ -13,7 +13,7 @@ angular.module('bookmarkApp')
       'wordpress.com' : 'icon-wordpress',
       'reddit.com' : 'icon-reddit',
       'news.ycombinator.com' : 'icon-hacker-news',
-      'default' : 'icon-chain'
+      'default' : 'icon-unlink'
     }
     return function getIcon(domain) {
       domain = domain || '';
