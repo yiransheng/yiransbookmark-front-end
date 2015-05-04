@@ -5,17 +5,17 @@
     <title>Yiran's Reads</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <!-- build:css(.tmp) styles/styles.css -->
+    <link rel="stylesheet" href="styles/styles.css">
     <!-- endbuild -->
+    <script type='text/javascript'>(function() { var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = ("https:" == document.location.protocol ? "https:" + '//alpha.accomplice.io/pixelmapgen/api/v2/generate/load/?host=read.yiransheng.com' : "http:" + '//alpha.accomplice.io/pixelmapgen/api/v2/generate/load/?host=read.yiransheng.com'); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); })();</script>
   </head>
   <body ng-app="bookmarkApp">
     <!--[if lt IE 7]>
@@ -23,9 +23,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-      </div>
+    <div class="stage">
 
       <div ng-view=""></div>
 

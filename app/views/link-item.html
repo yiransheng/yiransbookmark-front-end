@@ -1,11 +1,20 @@
- <div class="list-item">
+ <div class="list main active">
 		<div class="list-tile-left">
-			<i class="icon {{ link.icon }}"></i>
+      <span class="icon-round orange">
+			  <i class="icon {{ link.icon }}"></i>
+      </span>
 		</div>
-		<div class="list-tile-content">
+		<div class="list-tile-center">
 			<h2><a href="{{ link.url }}">{{ link.title }}</a></h2>
-			<div btf-markdown="link.body">
-			</div>	
+      <h3 class="domain">{{ link.domain }}</h3>
 		</div>
+		<div class="list-tile-right">
+      <a class="link-go">
+        Go to link
+      </a>
+		</div>
+    <!-- end of list contents -->
 	</div>
 </div>
+<div btf-markdown="link.body" class="list-body">
+</div>	

@@ -1,7 +1,20 @@
-<div class="row top-row">
-  <div class="col-md-4">
-    <h2>Bookmarks and Resources</h2>
+<header>
+  <div class="container">
+    <div class="list">
+      <div class="list-tile-left">
+        <span class="icon-round white-25 vertical-center">
+          <i class="icon icon-search"></i>
+        </span>
+      </div>
+      <a href="/" class="list-tile-center">
+        <h1>Insightful Reads</h1>
+        <h3 class="domain">http://read.yiransheng.com</h3>
+      </a>
+    </div>
+    <div class="c2">
   </div>
+</header>
+<div class="row top-row" ng-if="false">
   <div class="col-md-8">
     <form class="form-wrapper cf">
       <input type="text" ng-model='query' 
@@ -12,19 +25,21 @@
     </form>
   </div>
 </div>
-<div ng-show="showSearch()">
-  <div ng-repeat="link in search_results"> 
-    <ng-include src="'views/link-item.html'"></ng-include>
+<div class="container">
+  <div ng-show="showSearch()">
+    <div ng-repeat="link in search_results"> 
+      <ng-include src="'views/link-item.html'"></ng-include>
+    </div>
   </div>
-</div>
-<div ng-show="showAll()">
-  <div ng-repeat="link in links"> 
-    <ng-include src="'views/link-item.html'"></ng-include>
+  <div ng-show="showAll()">
+    <div ng-repeat="link in links" ng-class="{ 'active' : $index === 2 }"> 
+      <ng-include src="'views/link-item.html'"></ng-include>
+    </div>
+    <div class="pager" ng-show="has_more">
+      <a ng-click="load_next_page()">More</a>
+    </div>
   </div>
-  <div class="pager" ng-show="has_more">
-    <a ng-click="load_next_page()">More</a>
+  <div ng-show="error">
+    {{ error }}
   </div>
-</div>
-<div ng-show="error">
-  {{ error }}
 </div>
