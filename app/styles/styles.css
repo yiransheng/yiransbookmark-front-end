@@ -1320,7 +1320,10 @@ h3 {
   }
 }
 p {
-  margin: 0 0 1.71428571em;
+  margin: 0;
+}
+p + p {
+  margin-top: 1.71428571em;
 }
 .clear-margin-bottom {
   margin-bottom: 0;
@@ -1521,6 +1524,64 @@ header a:hover {
 .orange {
   color: #f5f5f5;
 }
+.list.header {
+  height: 5.25em;
+}
+.list.header .search {
+  position: relative;
+  height: 2.5em;
+  top: 1.375em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #f4511e;
+}
+.list.header .search input {
+  color: #f5f5f5;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  width: 100%;
+  border-bottom: 1px solid transparent;
+}
+.list.header .search input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.list.header .search input:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(255, 255, 255, 0.4);
+}
+.list.header .search input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(255, 255, 255, 0.4);
+}
+.list.header .search input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.list.header .search input:focus {
+  outline: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+@media screen and (min-width: 62em) {
+  .list.header .title,
+  .list.header .search {
+    float: left;
+  }
+  .list.header .title {
+    width: 60%;
+  }
+  .list.header .search {
+    top: 1.875em;
+    width: 40%;
+  }
+  .list.header .list-tile-center:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
 .list {
   min-height: 5.25em;
   overflow: hidden;
@@ -1539,6 +1600,9 @@ header a:hover {
 .list.main {
   border-top: 1px solid #e0e0e0;
 }
+.list h1 {
+  margin-top: 0.75rem;
+}
 .list h1,
 .list h2 {
   margin-bottom: 0;
@@ -1548,6 +1612,14 @@ header a:hover {
 }
 .list.main .domain {
   color: #26a69a;
+}
+@media screen and (min-width: 62em) {
+  .list.header {
+    height: auto;
+  }
+  .list h1 {
+    margin-top: 1.5rem;
+  }
 }
 .active .list.main {
   background-color: #eeeeee;
@@ -1577,11 +1649,24 @@ header a:hover {
   width: 3em;
   top: 0;
   right: 0;
+  padding-left: 0.5rem;
 }
 .list-body {
   padding: 0.75rem 0.5rem;
   background-color: #eeeeee;
   display: none;
+}
+.list-body blockquote {
+  margin: 0.75rem 0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-left: 2px solid #fb8c00;
+}
+@media only screen and (min-width: 62em) {
+  .list-body {
+    padding-left: 4em;
+    margin-top: -1rem;
+    z-index: 1000;
+  }
 }
 .active .list-body {
   display: block;
@@ -1595,5 +1680,50 @@ header a:hover {
   height: 100%;
   background-color: #eeeeee;
   text-decoration: none;
-  color: #eeeeee;
+}
+.link-go svg {
+  position: relative;
+  top: 1.5em;
+  left: 0.8125em;
+  fill: rgba(24, 23, 44, 0.1);
+}
+.link-go:hover svg {
+  fill: rgba(24, 23, 44, 0.15);
+}
+@media only screen and (min-width: 62em) {
+  .link-go {
+    display: none;
+  }
+}
+.pager {
+  background-color: #fafafa;
+  border-top: 1px solid #fefefe;
+  padding: 0.75rem 0.5rem;
+}
+.pager a {
+  color: #fb8c00;
+  cursor: pointer;
+}
+.container {
+  width: 100%;
+}
+@media screen and (min-width: 48em) {
+  .list-tile-left {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+}
+@media screen and (min-width: 62em) {
+  .list,
+  .list-body {
+    background-color: transparent!important;
+  }
+  .container {
+    max-width: 60em;
+    margin: 0 auto;
+  }
+  .pager {
+    background-color: transparent;
+    border-top: 1px soldi;
+  }
 }

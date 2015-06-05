@@ -8,8 +8,8 @@
  * Controller of the fbookmarkApp
  */
 angular.module('bookmarkApp')
-  .controller('MainCtrl', ['$scope','$rootScope', '$http', '$routeParams', '$location', 'settings', 'Search', 'iconMapping', 
-  function ($scope, $rootScope, $http, $routeParams, $location, settings, Search, iconMapping) {
+  .controller('MainCtrl', ['$scope','$rootScope', '$http', '$routeParams', '$location', '$window', 'settings', 'Search', 'iconMapping', 'responsiveUtils', 
+  function ($scope, $rootScope, $http, $routeParams, $location, $window, settings, Search, iconMapping, responsiveUtils) {
     $scope.search_results = [];
     $scope.Search = Search;
     $scope.query = $routeParams.search || '';
@@ -19,13 +19,20 @@ angular.module('bookmarkApp')
     $scope.showSearch = function() {
       return !$rootScope.error && Search.status === settings.SEARCH_STATUS.DONE;
     }
-    $scope.$watch('query', function(query) {
+    $scope.toggleSearchBar = function() {
+      var r = responsiveUtils.getResponsiveClass();
+      if(r === 'lg' || r === 'md') {
+        return true;
+      }
+      $scope.searchBarVisible = !$scope.searchBarVisible;
+    };
+    $scope.commitSearch = function(query) {
       if(!query || query.length===0) {
         $location.search('search', null);
       } else {
         $location.search('search', query.toLowerCase() );
       }
-    });
+    };
     if($routeParams.next && !$scope.query) {
       $rootScope.next_page = $routeParams.next;
       $rootScope.load_next_page(true);
@@ -40,4 +47,27 @@ angular.module('bookmarkApp')
     } else {
       Search.clearSearch();
     }
+
+    $scope.clickLink = function(evt, link) {
+      var r = responsiveUtils.getResponsiveClass();
+      if(r === 'lg' || r === 'md') {
+        return;
+      }
+      evt.preventDefault();
+      evt.stopPropagation();
+      link.collapsed = !link.collapsed;
+    };
+
+    $scope.isPhone = function() {
+      var r = responsiveUtils.getResponsiveClass();
+      if(r === 'lg' || r === 'md') {
+        return false;
+      }
+      return true;
+    };
+
+    window.onresize = function() {
+      $rootScope.$digest();
+    };
+
   }]);
