@@ -29,7 +29,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/:query*?', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         reloadOnSearch : true
