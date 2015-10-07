@@ -46,6 +46,7 @@ angular.module('bookmarkApp')
       });
     } else {
       Search.clearSearch();
+      $rootScope.load_next_page();
     }
 
     $scope.clickLink = function(evt, link) {

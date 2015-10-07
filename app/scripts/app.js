@@ -29,13 +29,15 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/:query*?', {
+      .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         reloadOnSearch : true
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: function(_, path, search) {
+          return '/' + (search.search ? '?search=' + search.search : '');
+        }
       });
   })
   .constant('settings', {
@@ -73,6 +75,5 @@ angular
         $rootScope.error = "Oops, something went wrong. ";
       });
     }
-    $rootScope.load_next_page();
   }]);
 
